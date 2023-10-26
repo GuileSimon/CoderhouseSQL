@@ -1,25 +1,26 @@
 -- CRIANDO SP PARA ORDENAR A TABELA clientes DE ACORDO COM A COLUNA DESEJADA E SE É ASC ou DESC
 
 DELIMITER $$
-CREATE PROCEDURE `sp_get_clientes_order`(IN campo CHAR(20), IN orderDirection CHAR(4))
+CREATE PROCEDURE `sp_ordenar_clientes`(IN campo CHAR(20), IN ordenar CHAR(4))
 BEGIN
 	-- Verifique se o campo não está em branco
 	IF campo <> '' THEN
 		-- Concatenar a cláusula ORDER BY com a direção de ordenação
-		SET @cliente_order = CONCAT('ORDER BY ', campo, ' ', orderDirection);
+		SET @cliente_ordenar = CONCAT('ORDER BY ', campo, ' ', ordenar);
 	-- Caso contrário, não faça nada
 	ELSE
-		SET @cliente_order = '';
+		SET @cliente_ordenar = '';
 	END IF;
 
 	-- Montar a consulta SQL
-	SET @clausula = CONCAT('SELECT * FROM clientes ', @cliente_order);
+	SET @ordem = CONCAT('SELECT * FROM clientes ', @cliente_ordenar);
 
 	-- Preparar e executar a consulta SQL
-	PREPARE runSQL FROM @clausula;
+	PREPARE runSQL FROM @ordem;
 	EXECUTE runSQL;
 	DEALLOCATE PREPARE runSQL;
 END$$
+
 
 
 
@@ -30,12 +31,10 @@ DROP procedure IF EXISTS sp_inserir_fabricante;
 DROP procedure IF EXISTS sp_excluir_fabricante;
 
 DELIMITER $$
-
 -- Stored Procedure para inserir um registro na tabela fabricantes
 
 CREATE PROCEDURE sp_inserir_fabricante(
-    IN acao CHAR(10), -- Ação: 'inserir' 
-    IN nomeFabricante CHAR(100),
+	IN nomeFabricante CHAR(100),
     IN informacoes CHAR(100),
     IN tel CHAR(12),
     IN email CHAR(100))
@@ -54,10 +53,10 @@ END$$
 
 
 
+DELIMITER $$
 -- Stored Procedure para excluir um registro na tabela fabricantes
 CREATE PROCEDURE sp_excluir_fabricante(
-    IN acao CHAR(10), -- Ação: 'excluir' 
-    IN fabricante_id INT) -- ID do fabricante para excluir
+       IN fabricante_id INT) -- ID do fabricante para excluir
 BEGIN
     IF fabricante_id IS NULL THEN
         -- Se o ID do fabricante estiver ausente, mostre uma mensagem de erro.
