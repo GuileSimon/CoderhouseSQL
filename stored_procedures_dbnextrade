@@ -34,7 +34,7 @@ DELIMITER $$
 -- Stored Procedure para inserir um registro na tabela fabricantes
 
 CREATE PROCEDURE sp_inserir_fabricante(
-	IN nomeFabricante CHAR(100),
+    IN nomeFabricante CHAR(100),
     IN informacoes CHAR(100),
     IN tel CHAR(12),
     IN email CHAR(100))
