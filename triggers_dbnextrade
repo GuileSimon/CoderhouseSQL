@@ -85,8 +85,8 @@ numero varchar(10),
 estado varchar(2), 
 regiao_id int);
   
--- Detectar uma modificação de um registro da tabela
--- clientes antes dele ocorrer, e armazenar first_date e last_date
+-- Trigger tr_clientes_update_log cria um novo registro na tabela clientes_update_log 
+-- toda vez em que a tabela clientes é atualizada
 
 create trigger tr_clientes_update_log
 before update on clientes
