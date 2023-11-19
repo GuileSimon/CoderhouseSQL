@@ -6,7 +6,7 @@ create user 'tiago.firmino'@'localhost' identified by 'Mudar@123'; -- leitura, i
 create user 'jonatas.barros'@'localhost' identified by 'Mudar@123'; -- Permissão total
 
 -- Concedendo permissão somente de leitura para todas tabelas (sem permissão de exclusão)
-grant select on dbnextrade to 'guilherme.simoes'@'localhost';
+grant select on dbnextrade.* to 'guilherme.simoes'@'localhost';
 
 -- Concedendo permissão leitura, inserção e modificação de dados de todas as tabelas (sem permissão de exclusão)
 grant select, insert, update on dbnextrade.* to 'tiago.firmino'@'localhost';
